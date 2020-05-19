@@ -1,24 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import Form from "./Form";
+
+// Shape of object
+const initialTeamList = [
+  {
+    name: "Joey",
+    email: "joey@xm8.ninja",
+    role: "Full Stack Engineer",
+  },
+];
+
+// Give State default value
+const initialFormValues = {
+  name: "",
+  email: "",
+  role: "",
+};
 
 function App() {
+  const [team, setTeam] = useState(initialTeamList);
+  const [formValues, setFormValues] = useState(initialFormValues);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header>
+        <h1>Team List</h1>
       </header>
+
+      <Form name={formValues} />
     </div>
   );
 }
