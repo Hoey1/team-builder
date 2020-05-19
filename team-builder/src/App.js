@@ -19,7 +19,7 @@ const initialFormValues = {
   role: "",
 };
 
-function App() {
+export default function App() {
   const [team, setTeam] = useState(initialTeamList);
   const [formValues, setFormValues] = useState(initialFormValues);
 
@@ -31,11 +31,11 @@ function App() {
 
       <Form
         values={formValues}
-        onInputChange={onInputChange}
-        onSubmit={onSubmit}
+        // onInputChange={onInputChange}
+        // onSubmit={onSubmit}
       />
     </div>
   );
 }
 
-export default App;
+// export default App;
