@@ -20,8 +20,32 @@ export default function Form(props) {
               maxLength="20"
               name="teammate"
               value={name.teammate}
-              // onChange={}
+              onChange={onInputChange}
             />
+          </label>
+
+          <label>
+            Email:&nbsp;
+            <input
+              type="text"
+              placeholder="Type an Email"
+              maxLength="25"
+              name="email"
+              value={values.email}
+              onChange={onInputChange}
+            />
+          </label>
+
+          <label>
+            Role:&nbsp;
+            <select name="role" value={values.role} onChange={onInputChange}>
+              <option value="">Select a Role</option>
+              <option value="HR">HR</option>
+              <option value="Front End Engineer">Front End Engineer</option>
+              <option value="Back End Engineer">Back End Engineer</option>
+              <option value="Full Stack Engineer">Full Stack Engineer</option>
+              <option value="Intern">Intern</option>
+            </select>
           </label>
         </div>
       </div>

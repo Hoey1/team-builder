@@ -29,7 +29,11 @@ function App() {
         <h1>Team List</h1>
       </header>
 
-      <Form name={formValues} />
+      <Form
+        values={formValues}
+        onInputChange={onInputChange}
+        onSubmit={onSubmit}
+      />
     </div>
   );
 }
