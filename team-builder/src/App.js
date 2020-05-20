@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { v4 as uuid } from "uuid";
 import "./App.css";
 import Form from "./Form";
 
 // Shape of object
 const initialTeamList = [
   {
+    id: uuid(),
     teammate: "Joey",
     email: "joey@xm8.ninja",
     role: "Full Stack Engineer",
@@ -37,6 +39,11 @@ export default function App() {
     ) {
       return;
     }
+    const newTeam = { ...formValues, id: uuid() };
+
+    setTeam([newTeam, ...team]);
+
+    setFormValues(initialFormValues);
 
     return (
       <div className="App">
@@ -49,6 +56,10 @@ export default function App() {
           onInputChange={onInputChange}
           onSubmit={onSubmit}
         />
+
+        {team.map((person) => {
+          return <Form key={person.id} details={person} />;
+        })}
       </div>
     );
   };
