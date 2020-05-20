@@ -6,12 +6,12 @@ export default function Form(props) {
   return (
     <form className="form container" onSubmit={onSubmit}>
       <div className="form-group submit">
-        <h2>Add a Friend</h2>
+        <h2>Add a Teammate</h2>
         <button>Submit</button>
       </div>
 
       <div className="form-group inputs">
-        <h4>Team information</h4>
+        <h4>Team Information</h4>
 
         <label>
           Name:&nbsp;
