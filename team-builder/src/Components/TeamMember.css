@@ -1,0 +1,13 @@
+.member {
+  display: flex;
+  justify-content: center;
+  border: 1px black solid;
+}
+
+.btn {
+  margin-bottom: 20px;
+}
+
+.bold {
+  font-weight: bold;
+}

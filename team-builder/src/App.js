@@ -1,66 +1,78 @@
-import React, { useState } from "react";
-import { v4 as uuid } from "uuid";
+import React from "react";
 import "./App.css";
-import Form from "./Form";
+import { useState } from "react";
+import TeamMember from "./Components/TeamMember";
+import Form from "./Components/Form";
+import uuid from "uuid";
 
-// Shape of object
-const initialTeamList = [
-  {
+function App() {
+  // Shape of object
+  const initialTeamMember = {
     id: uuid(),
     teammate: "Joey",
     email: "joey@xm8.ninja",
     role: "Full Stack Engineer",
-  },
-];
-
-// Give State default value
-const initialFormValues = {
-  teammate: "",
-  email: "",
-  role: "",
-};
-
-export default function App() {
-  const [team, setTeam] = useState(initialTeamList);
-  const [formValues, setFormValues] = useState(initialFormValues);
-
-  const onInputChange = (evt) => {
-    const { teammate } = evt.target;
-    const { value } = evt.target;
-    setFormValues({ ...formValues, [teammate]: value });
   };
 
-  const onSubmit = (evt) => {
-    evt.preventDefault();
-    if (
-      !formValues.teammate.trim() ||
-      !formValues.email.trim() ||
-      !formValues.role.trim()
-    ) {
-      return;
-    }
-    const newTeam = { ...formValues, id: uuid() };
+  const initialFormValues = {
+    name: "",
+    email: "",
+    role: "",
+  };
 
-    setTeam([newTeam, ...team]);
+  const [teamMembers, setTeamMembers] = useState([initialTeamMember]);
+  const [formValues, setFormValues] = useState(initialFormValues);
+  const [memberToEdit, setMemberToEdit] = useState();
 
-    setFormValues(initialFormValues);
+  const editMember = (event) => {
+    const chosenMemberArr = teamMembers.filter((member) => {
+      if (member.id === event.target.id) {
+        return member;
+      }
+    });
 
-    return (
-      <div className="App">
-        <header>
-          <h1>Team List</h1>
-        </header>
+    setMemberToEdit(chosenMemberArr[0]);
+  };
 
+  const onChangeText = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+
+    setFormValues({
+      ...formValues,
+      [name]: value,
+    });
+  };
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+    const newMember = {
+      id: uuid(),
+      name: formValues.name,
+      email: formValues.email,
+      role: formValues.role,
+    };
+
+    setTeamMembers([...teamMembers, newMember]);
+  };
+
+  return (
+    <div className="App">
+      {teamMembers.map((member) => {
+        return <TeamMember editMember={editMember} member={member} />;
+      })}
+
+      <div>
         <Form
+          setFormValues={setFormValues}
+          memberToEdit={memberToEdit}
           values={formValues}
-          onInputChange={onInputChange}
+          onChangeText={onChangeText}
           onSubmit={onSubmit}
         />
-
-        {team.map((person) => {
-          return <Form key={person.id} details={person} />;
-        })}
       </div>
-    );
-  };
+    </div>
+  );
 }
+
+export default App;
