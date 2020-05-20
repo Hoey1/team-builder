@@ -58,10 +58,6 @@ function App() {
 
   return (
     <div className="App">
-      {teamMembers.map((member) => {
-        return <TeamMember editMember={editMember} member={member} />;
-      })}
-
       <div>
         <Form
           setFormValues={setFormValues}
@@ -71,6 +67,10 @@ function App() {
           onSubmit={onSubmit}
         />
       </div>
+
+      {teamMembers.map((member) => {
+        return <TeamMember editMember={editMember} member={member} />;
+      })}
     </div>
   );
 }
